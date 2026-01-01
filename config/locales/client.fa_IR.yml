@@ -148,7 +148,7 @@ fa_IR:
       de:
         name: آلمانی
       en:
-        name: انگلیسی (لهجه آمریکایی)
+        name: انگلیسی
       en_GB:
         name: انگلیسی (بریتانیا)
       es:
@@ -2609,6 +2609,8 @@ fa_IR:
       upload_title: "بارگذاری"
       upload_description: "توضیح بارگذاری را در اینجا بنویسید"
       list_item: "فهرست موارد"
+      wrap_modal:
+        apply: "اعمال کردن"
       help: "راهنمای ویرایش با Markdown"
       exit_fullscreen_prompt: "برای خروج از تمام صفحه، دکمه <kbd>ESC</kbd> را فشار دهید"
       modal_ok: "تایید"
@@ -2660,6 +2662,7 @@ fa_IR:
         title: "توضیحات تصویر را اضافه کنید"
       image_toolbar:
         alt_text: "توضیحات تصویر را اضافه کنید"
+      image: "تصویر"
       image_scale_button: "تغییر مقیاس تصویر به %{percent}%"
       delete_image_button: حذف تصویر
       toggle_image_grid: تغییر وضعیت شبکه تصویر
@@ -4222,6 +4225,7 @@ fa_IR:
         this_month: "ماه"
         this_week: "هفته"
         today: "امروز"
+        custom: "سفارشی"
     custom_homepage:
       admin_message: 'یکی از پوسته‌های شما، اصلاح‌کننده «custom_homepage» را فعال کرده است؛ اما چیزی را در رابط [custom-homepage] خروجی نمی‌دهد. (این پیام فقط برای مدیران سایت نمایش داده می شود.)'
     permission_types:
@@ -4435,6 +4439,7 @@ fa_IR:
       upload_description: "برای ایجاد تگ ها به صورت دسته جمعی یک فایل csv آپلود کنید"
       upload_instructions: "یکی در هر خط، به صورت اختیاری با یک گروه برچسب؛ در قالب 'نام_تگ, گروه_تگ'."
       upload_successful: "تگ‌ها با موفقیت بارگذاری شد"
+      bulk_create_button: "ایجاد"
       delete_unused_confirmation:
         one: "%{count} برچسب حذف خواهد شد:%{tags}"
         other: "%{count} برچسب حذف خواهد شد: %{tags}"
@@ -4584,7 +4589,6 @@ fa_IR:
       tags_form_modal:
         title: "ویرایش ناوبری برچسب‌ها"
         filter_placeholder: "فیلتر کردن برچسب‌ها"
-        no_tags: "هیچ برچسبی مطابق با عبارت داده شده وجود ندارد."
         subtitle:
           text: "و ما به طور خودکار برچسب‌های برتر این سایت را نشان خواهیم داد"
       edit_navigation_modal_form:
@@ -4884,6 +4888,8 @@ fa_IR:
         enabled_for_options:
           everyone: "همه"
           staff: "فقط به تیم مدیریت"
+        statuses:
+          experimental: "آزمایشی"
         impact_roles:
           admins: "مدیران ارشد"
           moderators: "ناظران"
@@ -4893,6 +4899,7 @@ fa_IR:
           enabled: "فعال شده"
           disabled: "غیرفعال"
           impact_type_other: "دیگر"
+          status_experimental: "آزمایشی"
       config:
         about:
           title: "درباره سایت شما"
@@ -4923,6 +4930,8 @@ fa_IR:
           sub_pages:
             common_settings:
               title: "تنظیم"
+        discourse_id:
+          learn_more: "بیشتر بدانید"
         logo:
           form:
             logo:
@@ -7004,16 +7013,12 @@ fa_IR:
             prompt: "تغییر این تنظیمات ممکن است عواقب گسترده یا ناخواسته ای برای سایت شما داشته باشد. آیا مطمئن هستید که می خواهید ادامه دهید؟"
             confirm: "بله، مطمئنم"
           min_password_length:
-            prompt: "شما در حال تغییر سیاست رمز عبور خود هستید. این تغییر از این پس بر تمام کاربرانی که رمز عبور خود را تغییر می‌دهند، اعمال خواهد شد. آیا مطمئن هستید که می‌خواهید ادامه دهید؟"
             confirm: "بله، سیاست رمز عبور را به روز کنید"
           min_admin_password_length:
-            prompt: "شما در حال تغییر سیاست رمز عبور خود هستید. این تغییر از این پس بر تمام مدیرانی که رمز عبور خود را تغییر می‌دهند، اعمال خواهد شد. آیا مطمئن هستید که می‌خواهید ادامه دهید؟"
             confirm: "بله، سیاست رمز عبور را به روز کنید"
           password_unique_charactes:
-            prompt: "شما در حال تغییر سیاست رمز عبور خود هستید. این تغییر از این پس بر تمام کاربرانی که رمز عبور خود را تغییر می‌دهند، اعمال خواهد شد. آیا مطمئن هستید که می‌خواهید ادامه دهید؟"
             confirm: "بله، سیاست رمز عبور را به روز کنید"
           block_common_passwords:
-            prompt: "شما در حال تغییر سیاست رمز عبور خود هستید. این تغییر از این پس بر تمام کاربرانی که رمز عبور خود را تغییر می‌دهند، اعمال خواهد شد. آیا مطمئن هستید که می‌خواهید ادامه دهید؟"
             confirm: "بله، سیاست رمز عبور را به روز کنید"
       badges:
         status: وضعیت
@@ -7048,6 +7053,8 @@ fa_IR:
         no_user_badges: "%{name} هیچ نشانی دریافت نکرده است."
         no_badges: نشانی برای اعطا کردن وجود ندارد.
         none_selected: "برای شروع یک نشان رو انتخاب کنید"
+        sections:
+          settings: تنظیم
         usage_heading: استفاده
         allow_title: اجازه‌ی استفاده نشان برای عنوان
         multiple_grant: نمی توان چندین بار اعطا کرد

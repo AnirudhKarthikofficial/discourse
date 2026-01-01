@@ -158,7 +158,7 @@ pt:
       el:
         name: Grego
       en:
-        name: Inglês (EUA)
+        name: Inglês
       en_GB:
         name: Inglês (Reino Unido)
       es:
@@ -862,7 +862,6 @@ pt:
         flagged: "Sinalizado"
         flagged_as_by: "Sinalizado como %{flagReason} por %{username} · %{relativeDate}"
         reviewed: "Revisto"
-        reviewed_by: "Revisto por %{username} · %{relativeDate}"
         view_conversation: "ver PM"
         note_added: "Nota do moderador"
         note_added_by: "Nota do moderador por %{username} · %{relativeDate}"
@@ -2805,6 +2804,8 @@ pt:
       ulist_title: "Lista de símbolos"
       list_item: "Item da Lista"
       toggle_direction: "Direção de alternar"
+      wrap_modal:
+        apply: "Aplicar"
       help: "Ajuda de Edição Markdown"
       collapse: "Minimizar o painel de compositor"
       open: "Abrir o painel de compositor"
@@ -2865,6 +2866,7 @@ pt:
         zoom_out: "Diminuir tamanho da imagem"
         zoom_in: "Aumentar tamanho da imagem"
         remove: "Remover imagem"
+      image: "imagem"
       image_scale_button: "Escalar imagem para %{percent}%"
       delete_image_button: Excluir Imagem
       toggle_image_grid: Alternar grelha da imagem
@@ -4157,6 +4159,7 @@ pt:
         this_month: "Mês"
         this_week: "Semana"
         today: "Hoje"
+        custom: "Personalizar"
     permission_types:
       full: "Criar / Responder / Ver"
       create_post: "Responder / Ver"
@@ -4326,6 +4329,7 @@ pt:
       upload_description: "Faça upload de um arquivo csv para criar tags em massa"
       upload_instructions: "Um por linha, opcionalmente com um grupo de tags no formato 'tag_name,tag_group'."
       upload_successful: "Tags carregadas com sucesso"
+      bulk_create_button: "Criar"
       delete_unused_confirmation:
         one: "%{count} tag será excluída: %{tags}"
         other: "%{count} tags serão excluídas: %{tags}"
@@ -4553,6 +4557,8 @@ pt:
         enabled_for_options:
           everyone: "Todos"
           staff: "Apenas Pessoal"
+        statuses:
+          experimental: "Experimental"
         impact_roles:
           admins: "Administradores"
           moderators: "Moderadores"
@@ -4563,6 +4569,7 @@ pt:
           disabled: "Desativado"
           impact_type_feature: "Funcionalidade"
           impact_type_other: "Outro"
+          status_experimental: "Experimental"
       config:
         about:
           title: "Sobre o seu ''site''"
@@ -4588,6 +4595,11 @@ pt:
           sub_pages:
             common_settings:
               title: "Configurações"
+            discourse_id:
+              title: "Id. do Discourse"
+        discourse_id:
+          title: "Id. do Discourse"
+          learn_more: "Saiba mais"
         logo:
           title: "Logótipo"
           header_description: "Configure os logótipos e ícones utilizados no seu ''site''"
@@ -5877,6 +5889,8 @@ pt:
         no_user_badges: "%{name} não tem nenhum crachá."
         no_badges: Não existem crachás que possam ser atribuídos.
         none_selected: "Selecione um crachá para começar"
+        sections:
+          settings: Configurações
         allow_title: Permitir que o crachá seja usado como título
         multiple_grant: Pode ser concedido múltiplas vezes
         visibility_heading: Visibilidade

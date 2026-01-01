@@ -844,13 +844,17 @@ class Search
     type_filter: "all_topics"
   )
     if @order == :latest
-      if aggregate_search
+      if @in_title
+        posts = posts.order("topics.bumped_at DESC")
+      elsif aggregate_search
         posts = posts.order("MAX(posts.created_at) DESC")
       else
         posts = posts.reorder("posts.created_at DESC")
       end
     elsif @order == :oldest
-      if aggregate_search
+      if @in_title
+        posts = posts.order("topics.bumped_at ASC")
+      elsif aggregate_search
         posts = posts.order("MAX(posts.created_at) ASC")
       else
         posts = posts.reorder("posts.created_at ASC")
@@ -1100,13 +1104,16 @@ class Search
   def user_search
     return if SiteSetting.hide_user_profiles_from_public && !@guardian.user
 
+    # Exlude B weight from search which is the weight `User#name` is indexed with in `SearchIndexer.update_users_index`
+    query = ts_query("simple", weight_filter: SiteSetting.enable_names ? nil : "AC")
+
     users =
       User
         .includes(:user_search_data)
         .references(:user_search_data)
         .where(active: true)
         .where(staged: false)
-        .where("user_search_data.search_data @@ #{ts_query("simple")}")
+        .where("user_search_data.search_data @@ #{query}")
         .order("CASE WHEN username_lower = '#{@original_term.downcase}' THEN 0 ELSE 1 END")
         .order("last_posted_at DESC")
         .limit(limit)

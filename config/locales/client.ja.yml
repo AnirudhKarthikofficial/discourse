@@ -130,7 +130,7 @@ ja:
       el:
         name: ギリシャ語
       en:
-        name: 英語 (米国)
+        name: 英語
       en_GB:
         name: 英語 (英国)
       es:
@@ -780,7 +780,6 @@ ja:
         claimed: "引き受け"
         claimed_by: "%{username} が引き受け · %{relativeDate}"
         reviewed: "レビュー"
-        reviewed_by: "%{username} がレビュー · %{relativeDate}"
         view_conversation: "PM を見る"
         note_added: "モデレーターのメモ"
         note_added_by: "%{username} のモデレーターメモ · %{relativeDate}"
@@ -2656,6 +2655,8 @@ ja:
       ulist_title: "箇条書き"
       list_item: "リスト項目"
       toggle_direction: "方向の切り替え"
+      wrap_modal:
+        apply: "適用"
       help: "Markdown 編集のヘルプ"
       exit_fullscreen_prompt: "<kbd>ESC</kbd> を押して全画面表示を終了"
       modal_ok: "OK"
@@ -2714,6 +2715,7 @@ ja:
         zoom_out: "画像を縮小"
         zoom_in: "画像を拡大"
         remove: "画像の削除"
+      image: "画像"
       image_scale_button: "画像の表示率を %{percent}% に変更"
       delete_image_button: 画像を削除
       toggle_image_grid: 画像グリッドを切り替える
@@ -4221,6 +4223,7 @@ ja:
         this_month: "今月"
         this_week: "今週"
         today: "今日"
+        custom: "カスタム"
     custom_homepage:
       admin_message: 'テーマの 1 つで "custom_homepage" 修飾子が有効になっていますが、[custom-homepage] コネクタには何も出力されません。(このメッセージはサイト管理者にのみ表示されます。)'
     browser_update: '残念ながら、<a href="https://discourse.org/about#browser">あなたのブラウザはサポートされていません</a>。リッチコンテンツを表示するには<a href="https://browsehappy.com">サポートされているブラウザに切り替え</a>てから、ログインして返信してください。'
@@ -4442,6 +4445,7 @@ ja:
       upload_description: "csv ファイルをアップロードしてタグを一括作成します"
       upload_instructions: "1 行に 1 つ、オプションで 'タグ名,タググループ' の形式でタググループを使用します。"
       upload_successful: "タグを正常にアップロードしました"
+      bulk_create_button: "作成"
       delete_unused_confirmation:
         other: "%{count} 個のタグが削除されます: %{tags}"
       delete_unused_confirmation_more_tags:
@@ -4588,7 +4592,6 @@ ja:
       tags_form_modal:
         title: "タグナビゲーションを編集する"
         filter_placeholder: "タグをフィルタする"
-        no_tags: "指定された用語に一致するタグはありません。"
         subtitle:
           text: "このサイトの上位タグを自動的に表示します"
       edit_navigation_modal_form:
@@ -4949,6 +4952,8 @@ ja:
         enabled_for_options:
           everyone: "全員"
           staff: "スタッフのみ"
+        statuses:
+          experimental: "実験的"
         impact_roles:
           admins: "管理者"
           moderators: "モデレーター"
@@ -4959,6 +4964,7 @@ ja:
           disabled: "無効"
           impact_type_feature: "機能"
           impact_type_other: "その他"
+          status_experimental: "実験的"
       config:
         about:
           title: "サイトについて"
@@ -4995,6 +5001,11 @@ ja:
           sub_pages:
             common_settings:
               title: "設定"
+            discourse_id:
+              title: "Discourse ID"
+        discourse_id:
+          title: "Discourse ID"
+          learn_more: "もっと読む"
         logo:
           title: "ロゴ"
           header_description: "サイト全体で使用されるロゴとアイコンを構成します"
@@ -7436,16 +7447,12 @@ ja:
             prompt: "この設定を変更すると、サイトに広範に適用されるか意図しない結果が生じる可能性があります。続行してもよろしいですか？"
             confirm: "はい"
           min_password_length:
-            prompt: "パスワードポリシーを変更しようとしています。これは、今後すべてのユーザーのパスワード変更に影響します。続行してもよろしいですか？"
             confirm: "はい。パスワードポリシーを更新します"
           min_admin_password_length:
-            prompt: "パスワードポリシーを変更しようとしています。これは、今後すべての管理者のパスワード変更に影響します。続行してもよろしいですか？"
             confirm: "はい。パスワードポリシーを更新します"
           password_unique_charactes:
-            prompt: "パスワードポリシーを変更しようとしています。これは、今後すべてのユーザーのパスワード変更に影響します。続行してもよろしいですか？"
             confirm: "はい。パスワードポリシーを更新します"
           block_common_passwords:
-            prompt: "パスワードポリシーを変更しようとしています。これは、今後すべてのユーザーのパスワード変更に影響します。続行してもよろしいですか？"
             confirm: "はい。パスワードポリシーを更新します"
       badges:
         status: ステータス
@@ -7480,6 +7487,9 @@ ja:
         no_user_badges: "%{name} はバッジを付与されていません。"
         no_badges: 付与できるバッジがありません。
         none_selected: "開始するにはバッジを選択してください"
+        sections:
+          query: クエリ
+          settings: 設定
         usage_heading: 使用方法
         allow_title: バッジをタグラインとして使用することを許可する
         multiple_grant: 何度でも付与できる

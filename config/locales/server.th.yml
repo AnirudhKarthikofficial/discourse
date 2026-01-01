@@ -193,6 +193,7 @@ th:
       every_month: "ทุกเดือน"
       every_six_months: "ทุกหกเดือน"
   user_api_key:
+    deny: "ยกเลิก"
     read: "อ่าน"
     otp_confirmation:
       confirm_title: ดำเนินการต่อไปยัง %{site_name}
@@ -501,6 +502,9 @@ th:
   onebox:
     github:
       closed: "ปิด"
+      status_date:
+        approved: "อนุมัติแล้ว"
+        closed: "ปิด"
   discourse_push_notifications:
     popup:
       mentioned: '%{username} พูดถึงคุณใน "%{topic}" - %{site_title}'

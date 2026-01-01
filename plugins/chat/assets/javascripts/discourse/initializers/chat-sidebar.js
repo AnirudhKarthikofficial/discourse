@@ -131,9 +131,7 @@ function createChannelLink(BaseCustomSidebarSectionLink, options = {}) {
 
     get prefixType() {
       if (this.isDM) {
-        if (this.channel.iconUploadUrl) {
-          return "image";
-        } else if (this.channel.emoji) {
+        if (this.channel.emoji) {
           return "emoji";
         } else if (this.channel.chatable.group) {
           return "text";
@@ -147,9 +145,7 @@ function createChannelLink(BaseCustomSidebarSectionLink, options = {}) {
 
     get prefixValue() {
       if (this.isDM) {
-        if (this.channel.iconUploadUrl) {
-          return this.channel.iconUploadUrl;
-        } else if (this.channel.emoji) {
+        if (this.channel.emoji) {
           return this.channel.emoji;
         } else if (this.channel.chatable.group) {
           return this.channel.membershipsCount;
@@ -388,76 +384,74 @@ export default {
         CHAT_PANEL
       );
 
-      if (this.siteSettings.star_chat_channels) {
-        api.addSidebarSection(
-          (BaseCustomSidebarSection, BaseCustomSidebarSectionLink) => {
-            const SidebarChatStarredChannelLink = createChannelLink(
-              BaseCustomSidebarSectionLink,
-              {
-                showSuffix: false,
-                enableHoverForPublicChannels: false,
+      api.addSidebarSection(
+        (BaseCustomSidebarSection, BaseCustomSidebarSectionLink) => {
+          const SidebarChatStarredChannelLink = createChannelLink(
+            BaseCustomSidebarSectionLink,
+            {
+              showSuffix: false,
+              enableHoverForPublicChannels: false,
+            }
+          );
+
+          const SidebarChatStarredChannelsSection = class extends BaseCustomSidebarSection {
+            @service currentUser;
+            @service chatStateManager;
+            @service siteSettings;
+
+            constructor() {
+              super(...arguments);
+
+              if (container.isDestroyed) {
+                return;
               }
-            );
+              this.chatService = container.lookup("service:chat");
+              this.chatChannelsManager = container.lookup(
+                "service:chat-channels-manager"
+              );
+            }
 
-            const SidebarChatStarredChannelsSection = class extends BaseCustomSidebarSection {
-              @service currentUser;
-              @service chatStateManager;
-              @service siteSettings;
+            get sectionLinks() {
+              return this.chatChannelsManager.starredChannels.map(
+                (channel) =>
+                  new SidebarChatStarredChannelLink({
+                    channel,
+                    chatService: this.chatService,
+                    currentUser: this.currentUser,
+                    siteSettings: this.siteSettings,
+                    chatStateManager: this.chatStateManager,
+                  })
+              );
+            }
 
-              constructor() {
-                super(...arguments);
+            get name() {
+              return CHAT_STARRED_CHANNELS_SECTION;
+            }
 
-                if (container.isDestroyed) {
-                  return;
-                }
-                this.chatService = container.lookup("service:chat");
-                this.chatChannelsManager = container.lookup(
-                  "service:chat-channels-manager"
-                );
-              }
+            get title() {
+              return i18n("chat.starred_channels");
+            }
 
-              get sectionLinks() {
-                return this.chatChannelsManager.starredChannels.map(
-                  (channel) =>
-                    new SidebarChatStarredChannelLink({
-                      channel,
-                      chatService: this.chatService,
-                      currentUser: this.currentUser,
-                      siteSettings: this.siteSettings,
-                      chatStateManager: this.chatStateManager,
-                    })
-                );
-              }
+            get text() {
+              return i18n("chat.starred_channels");
+            }
 
-              get name() {
-                return CHAT_STARRED_CHANNELS_SECTION;
-              }
+            get links() {
+              return this.sectionLinks;
+            }
 
-              get title() {
-                return i18n("chat.starred_channels");
-              }
+            get displaySection() {
+              return (
+                this.chatStateManager.hasPreloadedChannels &&
+                this.chatChannelsManager.hasStarredChannels
+              );
+            }
+          };
 
-              get text() {
-                return i18n("chat.starred_channels");
-              }
-
-              get links() {
-                return this.sectionLinks;
-              }
-
-              get displaySection() {
-                return (
-                  this.chatStateManager.hasPreloadedChannels &&
-                  this.chatChannelsManager.hasStarredChannels
-                );
-              }
-            };
-
-            return SidebarChatStarredChannelsSection;
-          },
-          CHAT_PANEL
-        );
-      }
+          return SidebarChatStarredChannelsSection;
+        },
+        CHAT_PANEL
+      );
 
       if (this.siteSettings.enable_public_channels) {
         api.addSidebarSection(
@@ -575,11 +569,7 @@ export default {
               }
 
               get sectionLinks() {
-                const channels = this.siteSettings.star_chat_channels
-                  ? this.chatChannelsManager.unstarredPublicMessageChannels
-                  : this.chatChannelsManager.publicMessageChannels;
-
-                return channels.map(
+                return this.chatChannelsManager.unstarredPublicMessageChannels.map(
                   (channel) =>
                     new SidebarChatChannelsSectionLink({
                       channel,
@@ -756,9 +746,7 @@ export default {
               }
 
               get prefixType() {
-                if (this.channel.iconUploadUrl) {
-                  return "image";
-                } else if (this.channel.emoji) {
+                if (this.channel.emoji) {
                   return "emoji";
                 } else if (this.channel.chatable.group) {
                   return "text";
@@ -768,9 +756,7 @@ export default {
               }
 
               get prefixValue() {
-                if (this.channel.iconUploadUrl) {
-                  return this.channel.iconUploadUrl;
-                } else if (this.channel.emoji) {
+                if (this.channel.emoji) {
                   return this.channel.emoji;
                 } else if (this.channel.chatable.group) {
                   return this.channel.membershipsCount;
@@ -828,19 +814,16 @@ export default {
               }
 
               get hideSectionHeader() {
-                const channels = this.siteSettings.star_chat_channels
-                  ? this.chatChannelsManager
-                      .truncatedUnstarredDirectMessageChannels
-                  : this.chatChannelsManager.truncatedDirectMessageChannels;
-
-                return channels.length === 0;
+                return (
+                  this.chatChannelsManager
+                    .truncatedUnstarredDirectMessageChannels.length === 0
+                );
               }
 
               get sectionLinks() {
-                const channels = this.siteSettings.star_chat_channels
-                  ? this.chatChannelsManager
-                      .truncatedUnstarredDirectMessageChannels
-                  : this.chatChannelsManager.truncatedDirectMessageChannels;
+                const channels =
+                  this.chatChannelsManager
+                    .truncatedUnstarredDirectMessageChannels;
 
                 if (channels.length > 0) {
                   return channels.map(

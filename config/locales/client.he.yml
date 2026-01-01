@@ -214,7 +214,7 @@ he:
       el:
         name: יוונית
       en:
-        name: אנגלית אמריקאית
+        name: אנגלית
       en_GB:
         name: אנגלית בריטית
       es:
@@ -996,8 +996,11 @@ he:
         flagged_as_by: "מסומן בתור %{flagReason} על ידי %{username} · %{relativeDate}"
         claimed: "נדרש"
         claimed_by: "נדרש על ידי %{username} · %{relativeDate}"
+        unclaimed_by: "בוטלה דרישה על ידי %{username} · %{relativeDate}"
         reviewed: "נבדק"
-        reviewed_by: "נבדק על ידי %{username} · %{relativeDate}"
+        approved_by: "אושר על ידי %{username} · %{relativeDate}"
+        rejected_by: "נדחה על ידי %{username} · %{relativeDate}"
+        ignored_by: "הוזנח על ידי %{username} · %{relativeDate}"
         view_conversation: "הצגת הודעה פרטית"
         note_added: "הערת פיקוח"
         note_added_by: "הערת פיקוח מאת %{username} · %{relativeDate}"
@@ -1042,6 +1045,11 @@ he:
             two: "שני פוסטים"
             many: "%{count} פוסטים"
             other: "%{count} פוסטים"
+        moderation_history:
+          label: "היסטוריית פיקוח"
+          silenced: "השתקות: %{count}"
+          suspended: "השעיות: %{count}"
+          rejected_posts: "פוסטים שנדחו: %{count}"
         solution_marked: "סומן פתרון"
         topic_has_solution: "לנושא הזה יש פתרון"
         visibility: "חשיפה"
@@ -1508,6 +1516,11 @@ he:
       organisation: ארגון
       phone: טלפון
       other_accounts: "חשבונות נוספים עם כתובת IP זו:"
+      other_accounts_with_ip:
+        one: "חשבון אחר עם כתובת ה־IP הזאת"
+        two: "שני חשבונות אחרים עם כתובת ה־IP הזאת"
+        many: "%{count} חשבונות אחרים עם כתובת ה־IP הזאת"
+        other: "%{count} חשבונות אחרים עם כתובת ה־IP הזאת"
       delete_other_accounts:
         one: "מחיקה %{count}"
         two: "מחיקה %{count}"
@@ -3145,6 +3158,12 @@ he:
       ulist_title: "רשימת תבליטים"
       list_item: "פריט ברשימה"
       toggle_direction: "הפיכת כיוון"
+      wrap_modal:
+        attributes_label: "תכונותמאפיינים"
+        add_attribute: "הוספת מאפיין"
+        remove_attribute: "הסרת מאפיין"
+        apply: "החלה"
+        no_attributes: "לא נוספו מאפיינים עדיין."
       help: "עזרה בכתיבת Markdown"
       collapse: "מזעור לוח העריכה"
       open: "פתיחת לוח העריכה"
@@ -3213,6 +3232,7 @@ he:
         remove: "הסרת התמונה"
         add_to_grid: "הוספה לרשת"
         move_outside_grid: "הוצאה מהרשת"
+      image: "תמונה"
       grid_label: "יוצג כרשת"
       image_scale_button: "שינוי קנה המידה של התמונה לכדי %{percent}%"
       delete_image_button: מחיקת תמונה
@@ -3471,6 +3491,7 @@ he:
           aria_label: סינון באמצעות תגיות
         filters:
           label: להחזיר רק נושאים/פוסטים…
+          all: לכלול הודעות
           title: מתאימים רק בכותרת
           likes: אהבתי
           posted: פרסמתי בהם
@@ -3607,6 +3628,16 @@ he:
           two: "מחיקת נושאים"
           many: "מחיקת נושאים"
           other: "מחיקת נושאים"
+        delete_posts_count:
+          one: "מחיקת פוסט"
+          two: "מחיקת פוסטים"
+          many: "מחיקת פוסטים"
+          other: "מחיקת פוסטים"
+        delete_posts_confirmation:
+          one: "למחוק פוסט?"
+          two: "למחוק שני פוסטים?"
+          many: "למחוק %{count} פוסטים?"
+          other: "למחוק %{count} פוסטים?"
         dismiss: "ביטול"
         dismiss_read: "התעלמות מאלו שלא נקראו"
         dismiss_read_with_selected:
@@ -4243,9 +4274,9 @@ he:
       deleted_by_author_simple: "(הנושא נמחק על ידי הכותב)"
       localizations:
         title_edit_warning:
-          message: "זאת כותרת נושא מתורגמת.<br><br> האם לערוך את הכותרת המקורית ב%{language} או לערוך את התרגום המסוים הזה?"
-          action_original: "עריכת כותרת הנושא המקורית"
+          action_original: "עריכת המקור"
           action_translation: "עריכת כותרת הנושא המתורגמת"
+        editing_translation: "עריכת התרגום ל%{language}"
     post_list:
       title: "פוסטים אחרונים"
       empty: "אין פוסטים"
@@ -4261,6 +4292,7 @@ he:
         actions: "פעולות במרוכז"
     post:
       accessible_heading: "פוסט מאת %{username} %{date}"
+      heading_anchor: "קישור כותרת"
       confirm_delete: "למחוק את הפוסט הזה?"
       quote_reply: "ציטוט"
       quote_reply_shortcut: "ציטוט (או בלחיצה על q)"
@@ -5056,6 +5088,7 @@ he:
         this_month: "חודש"
         this_week: "שבוע"
         today: "היום"
+        custom: "מותאם"
     custom_homepage:
       admin_message: 'אחת מערכות הנושא שלך הפעילה את אפשרות "דף הבית מותאם אישית" אך הוא אינו מוציא דבר במֵחבַּר [דף הבית המותאם אישית]. (הודעה זו מוצגת רק למנהלי האתר.)'
     browser_update: 'אתרע מזלך וכי <a href="https://discourse.org/about#browser">דפדפנך אינו נתמך עוד</a>. נא <a href="https://browsehappy.com">לעבור לדפדפן נתמך</a> כדי לצפות בתוכן עשיר, להיכנס ולהגיב.'
@@ -5251,6 +5284,7 @@ he:
       add_to_calendar: "הוספה ללוח השנה"
       google: "לוח שנה של Google"
       ics: "ICS"
+      default_title: "אירוע מתוכנן"
     tagging:
       all_tags: "כל התגיות"
       other_tags: "תגיות אחרות"
@@ -5321,6 +5355,19 @@ he:
       upload_description: "ניתן להעלות קובץ csv כדי ליצור כמות גדולה של תגיות בבת אחת"
       upload_instructions: "אחת בשורה, אפשר עם קבוצת תגיות בתצורה ‚שם_תגית,קבוצת_תגיות’."
       upload_successful: "התגיות הועלו בהצלחה"
+      bulk_create_inline_placeholder: "יצירת תגיות (מופרדות בפסיקים)"
+      bulk_create_button: "יצירה"
+      bulk_create_success:
+        one: "נוצרה תגית:"
+        two: "נוצרו שתי תגיות:"
+        many: "נוצרו %{count} תגיות:"
+        other: "נוצרו %{count} תגיות:"
+      bulk_create_already_exist:
+        one: "תגית כבר קיימת:"
+        two: "שתי תגיות כבר קיימות:"
+        many: "%{count} תגיות כבר קיימות:"
+        other: "%{count} תגיות כבר קיימות:"
+      bulk_create_some_failed: "היצירה של חלק מהתגיות נכשלה:"
       delete_unused_confirmation:
         one: "תגית אחת תימחק: %{tags}"
         two: "%{count} תגיות תימחקנה: %{tags}"
@@ -5485,7 +5532,7 @@ he:
       tags_form_modal:
         title: "עריכת ניווט בתגיות"
         filter_placeholder: "סינון תגיות"
-        no_tags: "אין תגיות שתואמות לביטוי שסופק."
+        no_tags: "אין תגיות שתואמות למסננים הנוכחיים."
         subtitle:
           text: "ואנו נציג לך את התגיות המובילות באתר אוטומטית"
       edit_navigation_modal_form:
@@ -5838,6 +5885,8 @@ he:
       toggle_localized:
         translated: "העמוד מתורגם על ידי מכונה. יש ללחוץ כדי לצפות במקור."
         not_translated: "העמוד לא מתורגם. נא ללחוץ כדי לתרגם."
+    language_switcher:
+      title: "החלפת שפת האתר"
   admin_js:
     type_to_filter: "יש להקליד לסינון…"
     settings: "הגדרות"
@@ -5905,7 +5954,7 @@ he:
             many: "הקבוצות %{groupNames}"
             other: "הקבוצות %{groupNames}"
         statuses:
-          pre_alpha: "טרום אלפא"
+          experimental: "ניסיוני"
           alpha: "אלפא"
           beta: "בטא"
           stable: "יציב"
@@ -5927,7 +5976,7 @@ he:
           impact_type_feature: "יכולת"
           impact_type_other: "אחר"
           status_all: "כל המצבים"
-          status_pre_alpha: "טרום אלפא"
+          status_experimental: "ניסיוני"
           status_alpha: "אלפא"
           status_beta: "בטא"
           status_stable: "יציב"
@@ -5974,6 +6023,16 @@ he:
               title: "כניסות דרך רשתות חברתיות"
             discourseconnect:
               title: "Discourse Connect"
+            discourse_id:
+              title: "מזהה Discourse"
+        discourse_id:
+          title: "מזהה Discourse"
+          stats:
+            total_users: "סך כל המשתמשים"
+            signups_30_days: "הרשמות (30 יום)"
+            logins_30_days: "כניסות (30 יום)"
+          regenerate_credentials: "יצירת פרטי גישה מחדש"
+          learn_more: "מידע נוסף"
         logo:
           title: "לוגו"
           header_description: "הגדרת הלוגואים והסמלים בהם נעשה שימוש ברחבי האתר שלך"
@@ -6069,6 +6128,7 @@ he:
             enabled_themes:
               label: "פעילה בערכות הנושא…"
               description: "נא לבחור אילו ערכות עיצוב אמורות להציג את הכרזה. רק ערכות עיצוב פעילות מופיעות."
+              select_label: "בחירת ערכות עיצוב"
             background_image:
               label: "תמונת רקע"
               description: "התמונה הזאת תוצג מאחורי טקסט הכרזה."
@@ -7285,6 +7345,8 @@ he:
           create_name: "שם"
           save: "שמירה"
           long_title: "התאמת צבעים, CSS ותכני HTML של האתר שלך"
+          dark_mode: "מצב כהה של %{themeName}"
+          light_mode: "מצב בהיר של %{themeName}"
           edit: "עריכה"
           edit_confirm: "זו ערכת עיצוב מרוחקת, אם ערכת CSS/HTML השינויים שלך יימחקו עם העדכון הבא של ערכת העיצוב."
           update_confirm: "השינויים המקומיים האלה יימחקו על ידי העדכון. להמשיך?"
@@ -7915,6 +7977,7 @@ he:
         clear_all: לפנות הכול
         clear_all_confirm: "לפנות את כל המילים שבמעקב לפעולה %{action}?"
         invalid_regex: 'המילה „%{word}” שבמעקב היא ביטוי רגולרי שגוי.'
+        invalid_regex_multiple: "ביטויים רגולריים שגויים:"
         regex_warning: '<a href="%{basePath}/admin/site_settings/category/all_results?filter=watched%20words%20regular%20expressions%20">מילים במעקב הן ביטויים רגולריים</a> ואין כוללות גבולות מילים. כדי שהביטוי הרגולרי ילכוד מילים מלאות, יש לכלול ‎<code>\b</code>‎ בתחילת ובסוף הביטוי הרגולרי שלך.'
         actions:
           block: "חסימה"
@@ -7947,6 +8010,7 @@ he:
           success: "הצלחה"
           exists: "כבר קיימת"
           upload: "הוספה מקובץ"
+          upload_successful: "ההעלאה הצליחה. המילים יעובדו תוך זמן קצר."
           case_sensitivity_label: "הוא תלוי רישיות"
           case_sensitivity_description: "רק מילים עם התאמת אותיות רישיות/קטנות"
           html_label: "HTML"
@@ -8038,6 +8102,8 @@ he:
             second: "אפשרות 2"
             third: "אפשרות 3"
         edit_category:
+          toggle_freeform: "תבנית טופס מושבתת"
+          toggle_form_template: "תבנית טופס פעילה"
           select_template: "בחירת תבניות טופס"
           select_template_help: "הוספת/עריכת תבניות טופס"
         errors:
@@ -8593,17 +8659,20 @@ he:
             prompt: "לשינוי הגדרה זו עשויות להיות השלכות מרחיקות לכת או לא רצויות באתר שלך. להמשיך?"
             confirm: "כן, בוודאות"
           min_password_length:
-            prompt: "פעולה זו תשנה את מדיניות הסיסמאות שלך. היא תשפיע על כל המשתמשים שישנו את הסיסמה שלהם מעתה ואילך. להמשיך?"
+            prompt: "הפעולה הזאת תשנה את מדיניות הסיסמאות שלך. היא תשפיע על כל המשתמשים שישנו את הסיסמה שלהם מעתה ואילך. להמשיך?"
             confirm: "כן, לעדכן את מדיניות הסיסמאות"
           min_admin_password_length:
-            prompt: "פעולה זו תשנה את מדיניות הסיסמאות שלך. היא תשפיע על כל המנהלים שישנו את הסיסמה שלהם מעתה ואילך. להמשיך?"
+            prompt: "הפעולה הזאת תשנה את מדיניות הסיסמאות שלך. היא תשפיע על כל המנהלים שישנו את הסיסמה שלהם מעתה ואילך. להמשיך?"
             confirm: "כן, לעדכן את מדיניות הסיסמאות"
           password_unique_charactes:
-            prompt: "פעולה זו תשנה את מדיניות הסיסמאות שלך. היא תשפיע על כל המשתמשים שישנו את הסיסמה שלהם מעתה ואילך. להמשיך?"
+            prompt: "הפעולה הזאת תשנה את מדיניות הסיסמאות שלך. היא תשפיע על כל המשתמשים שישנו את הסיסמה שלהם מעתה ואילך. להמשיך?"
             confirm: "כן, לעדכן את מדיניות הסיסמאות"
           block_common_passwords:
-            prompt: "פעולה זו תשנה את מדיניות הסיסמאות שלך. היא תשפיע על כל המשתמשים שישנו את הסיסמה שלהם מעתה ואילך. להמשיך?"
+            prompt: "הפעולה הזאת תשנה את מדיניות הסיסמאות שלך. היא תשפיע על כל המשתמשים שישנו את הסיסמה שלהם מעתה ואילך. להמשיך?"
             confirm: "כן, לעדכן את מדיניות הסיסמאות"
+          clean_up_inactive_users_after_days:
+            prompt: "הגדרת הערך הזה לכל מספר שאינו 0 תגרום למחיקה לצמיתות של משתמשים שכבר אינם פעילים תוך מספר הימים הזה. להמשיך?"
+            confirm: "כן, ברור לי שמשתמשים לא פעילים יימחקו לצמיתות אלא אם כן הערך הזה יוגדר ל־0"
         job_status:
           completed: "העדכון הושלם"
           enqueued: "מתבצע עדכון"
@@ -8640,6 +8709,10 @@ he:
         no_user_badges: "למשתמש %{name} לא הוענקו עיטורים."
         no_badges: אין עיטורים שניתן להעניק.
         none_selected: "נא לבחור עיטור כדי להתחיל"
+        sections:
+          design: עיצוב
+          query: שאילתה
+          settings: הגדרות
         usage_heading: שימוש
         allow_title: לאפשר להשתמש בעיטור ככותרת
         multiple_grant: יכולים להינתן מספר פעמים

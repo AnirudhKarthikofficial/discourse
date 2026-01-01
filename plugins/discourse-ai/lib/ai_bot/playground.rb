@@ -110,7 +110,7 @@ module DiscourseAi
 
         all_llm_users =
           LlmModel
-            .where(enabled_chat_bot: true)
+            .where(id: LlmModel.enabled_chat_bot_ids)
             .joins(:user)
             .pluck("users.id", "users.username_lower")
 
@@ -191,7 +191,8 @@ module DiscourseAi
         stream_reply: false,
         auto_set_title: false,
         silent_mode: false,
-        feature_name: nil
+        feature_name: nil,
+        attributed_user: nil
       )
         ai_persona = AiPersona.find_by(id: persona_id)
         raise Discourse::InvalidParameters.new(:persona_id) if !ai_persona
@@ -212,6 +213,7 @@ module DiscourseAi
           auto_set_title: auto_set_title,
           silent_mode: silent_mode,
           feature_name: feature_name,
+          attributed_user: attributed_user,
         )
       rescue => e
         if Rails.env.test?
@@ -374,6 +376,36 @@ module DiscourseAi
         end
 
         reply
+      rescue LlmCreditAllocation::CreditLimitExceeded => e
+        if streamer && streamer.instance_variable_get(:@client_id)
+          ChatSDK::Channel.stop_reply(
+            channel_id: channel.id,
+            client_id: streamer.instance_variable_get(:@client_id),
+            guardian: guardian,
+            thread_id: message.thread_id,
+          )
+        end
+
+        reset_time = e.allocation&.relative_reset_time || ""
+        locale_key = message.user.admin? ? "limit_exceeded_admin" : "limit_exceeded_user"
+        error_message =
+          I18n.t("discourse_ai.llm_credit_allocation.#{locale_key}", reset_time: reset_time)
+
+        # Convert HTML links to markdown format for chat
+        error_message =
+          error_message.gsub(%r{<a\s+href=['"]([^'"]+)['"][^>]*>([^<]+)</a>}i, '[\2](\1)')
+
+        ChatSDK::Message.create(
+          raw: error_message,
+          channel_id: channel.id,
+          guardian: guardian,
+          thread_id: message.thread_id,
+          in_reply_to_id: in_reply_to_id,
+          force_thread: force_thread,
+          enforce_membership: !channel.direct_message_channel?,
+        )
+
+        nil
       ensure
         streamer.done if streamer
       end
@@ -390,6 +422,7 @@ module DiscourseAi
         feature_name: nil,
         existing_reply_post: nil,
         cancel_manager: nil,
+        attributed_user: nil,
         &blk
       )
         # this is a multithreading issue
@@ -423,6 +456,7 @@ module DiscourseAi
         context =
           DiscourseAi::Personas::BotContext.new(
             post: post,
+            user: attributed_user,
             custom_instructions: custom_instructions,
             feature_name: feature_name,
             messages:
@@ -472,7 +506,7 @@ module DiscourseAi
             end
 
             reply_post.update_columns(raw: "", cooked: "")
-            reply_post.post_custom_prompt&.destroy
+            reply_post.post_custom_prompt = nil
           else
             reply_post =
               PostCreator.create!(
@@ -485,6 +519,7 @@ module DiscourseAi
                 skip_guardian: true,
                 custom_fields: {
                   DiscourseAi::AiBot::POST_AI_LLM_NAME_FIELD => bot.llm.llm_model.display_name,
+                  DiscourseAi::AiBot::POST_AI_LLM_MODEL_ID_FIELD => bot.llm.llm_model.id,
                   DiscourseAi::AiBot::POST_AI_PERSONA_ID_FIELD => bot.persona.id,
                 },
               )
@@ -494,6 +529,10 @@ module DiscourseAi
             .llm
             .llm_model
             .display_name
+          reply_post.custom_fields[DiscourseAi::AiBot::POST_AI_LLM_MODEL_ID_FIELD] = bot
+            .llm
+            .llm_model
+            .id
           reply_post.custom_fields[DiscourseAi::AiBot::POST_AI_PERSONA_ID_FIELD] = bot.persona.id
           reply_post.save_custom_fields
 
@@ -527,7 +566,7 @@ module DiscourseAi
             next if type == :structured_output && !partial.finished?
 
             if should_start_thinking?(partial:, context:, type:, started_thinking:, placeholder:)
-              reply << "<details><summary>#{I18n.t("discourse_ai.ai_bot.thinking")}</summary>\n\n"
+              reply << "<details class='ai-thinking'><summary>#{I18n.t("discourse_ai.ai_bot.thinking")}</summary>\n\n"
               started_thinking = true
             elsif should_stop_thinking?(partial:, context:, type:, started_thinking:, placeholder:)
               reply << "</details>\n\n"
@@ -577,6 +616,7 @@ module DiscourseAi
               skip_guardian: true,
               custom_fields: {
                 DiscourseAi::AiBot::POST_AI_LLM_NAME_FIELD => bot.llm.llm_model.display_name,
+                DiscourseAi::AiBot::POST_AI_LLM_MODEL_ID_FIELD => bot.llm.llm_model.id,
                 DiscourseAi::AiBot::POST_AI_PERSONA_ID_FIELD => bot.persona.id,
               },
             )
@@ -593,6 +633,31 @@ module DiscourseAi
         end
 
         reply_post
+      rescue LlmCreditAllocation::CreditLimitExceeded => e
+        reset_time = e.allocation&.relative_reset_time || ""
+        locale_key = post.user.admin? ? "limit_exceeded_admin" : "limit_exceeded_user"
+        error_message =
+          I18n.t("discourse_ai.llm_credit_allocation.#{locale_key}", reset_time: reset_time)
+
+        if reply_post
+          reply = "#{reply}#{started_thinking ? "\n\n</details>" : ""}\n\n#{error_message}"
+          reply_post.revise(
+            bot.bot_user,
+            { raw: reply },
+            skip_validations: true,
+            skip_revision: true,
+          )
+        else
+          PostCreator.create!(
+            bot.bot_user,
+            topic_id: post.topic_id,
+            raw: error_message,
+            skip_validations: true,
+            skip_guardian: true,
+          )
+        end
+
+        nil
       rescue => e
         if reply_post
           details = e.message.to_s

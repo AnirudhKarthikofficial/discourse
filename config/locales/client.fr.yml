@@ -158,7 +158,7 @@ fr:
       el:
         name: Grec
       en:
-        name: Anglais (États-Unis)
+        name: Anglais
       en_GB:
         name: Anglais (Royaume-Uni)
       es:
@@ -848,7 +848,6 @@ fr:
         claimed: "Réclamé"
         claimed_by: "Réclamé par %{username} · %{relativeDate}"
         reviewed: "Examiné"
-        reviewed_by: "Examiné par %{username} · %{relativeDate}"
         view_conversation: "voir PM"
         note_added: "Note du modérateur"
         note_added_by: "Note du modérateur par %{username} · %{relativeDate}"
@@ -2811,6 +2810,8 @@ fr:
       ulist_title: "Liste à puces"
       list_item: "Élément"
       toggle_direction: "Basculer la section"
+      wrap_modal:
+        apply: "Appliquer"
       help: "Aide à l'édition Markdown"
       exit_fullscreen_prompt: "Appuyez sur <kbd>ÉCHAP</kbd> pour quitter le mode plein écran"
       modal_ok: "OK"
@@ -2869,6 +2870,7 @@ fr:
         zoom_out: "Réduire la taille de l'image"
         zoom_in: "Augmenter la taille de l'image"
         remove: "Supprimer l'image"
+      image: "image"
       image_scale_button: "Mettre l'image à l'échelle de %{percent} %"
       delete_image_button: Supprimer l'image
       toggle_image_grid: Activer/désactiver la grille des images
@@ -3779,8 +3781,6 @@ fr:
       deleted_by_author_simple: "(sujet supprimé par son auteur)"
       localizations:
         title_edit_warning:
-          message: "Ceci est un titre de sujet traduit.<br><br>Voulez-vous modifier le titre original en %{language} ou modifier cette traduction spécifique ?"
-          action_original: "Modifier le titre original du sujet"
           action_translation: "Modifier le titre du sujet traduit"
     post_list:
       title: "Dernières publications"
@@ -4484,6 +4484,7 @@ fr:
         this_month: "Mois"
         this_week: "Semaine"
         today: "Aujourd'hui"
+        custom: "Personnalisé"
     custom_homepage:
       admin_message: 'L''un de vos thèmes a activé le modificateur « custom_homepage », mais il n''affiche rien dans le connecteur [custom-homepage]. (Ce message s''adresse uniquement aux administrateurs du site.)'
     browser_update: 'Malheureusement, <a href="https://discourse.org/about#browser">votre navigateur n''est pas pris en charge</a>. Merci de <a href="https://browsehappy.com">mettre à jour votre navigateur</a> pour afficher le contenu enrichi, vous connecter et répondre.'
@@ -4717,6 +4718,7 @@ fr:
       upload_description: "Téléverser un fichier CSV pour créer des étiquettes en bloc"
       upload_instructions: "Une par ligne, éventuellement avec un groupe d'étiquettes sous la forme « tag_name,tag_group »."
       upload_successful: "Étiquettes envoyées avec succès"
+      bulk_create_button: "Créer"
       delete_unused_confirmation:
         one: "%{count} étiquette sera supprimée : %{tags}"
         other: "%{count} étiquettes seront supprimées : %{tags}"
@@ -4867,7 +4869,6 @@ fr:
       tags_form_modal:
         title: "Modifier la navigation des étiquettes"
         filter_placeholder: "Filtrer les étiquettes"
-        no_tags: "Il n'y a pas d'étiquettes correspondant au terme donné."
         subtitle:
           text: "et nous afficherons automatiquement les meilleures étiquettes de ce site"
       edit_navigation_modal_form:
@@ -5238,6 +5239,8 @@ fr:
         enabled_for_options:
           everyone: "Tout le monde"
           staff: "Responsables seulement"
+        statuses:
+          experimental: "Expérimental"
         impact_roles:
           admins: "Administrateurs "
           moderators: "Modérateurs"
@@ -5248,6 +5251,7 @@ fr:
           disabled: "Désactivé"
           impact_type_feature: "Fonctionnalité"
           impact_type_other: "Autre"
+          status_experimental: "Expérimental"
       config:
         about:
           title: "À propos de votre site"
@@ -5284,6 +5288,11 @@ fr:
           sub_pages:
             common_settings:
               title: "Paramètres"
+            discourse_id:
+              title: "Discourse ID"
+        discourse_id:
+          title: "Discourse ID"
+          learn_more: "En savoir plus…"
         logo:
           title: "Logo"
           header_description: "Configurez les logos et les icônes utilisés sur votre site"
@@ -7751,16 +7760,12 @@ fr:
             prompt: "La modification de ce paramètre peut avoir des conséquences importantes ou inattendues pour votre site. Voulez-vous vraiment continuer ?"
             confirm: "Oui, continuer"
           min_password_length:
-            prompt: "Vous êtes sur le point de modifier votre politique en matière de mots de passe. Cela affectera désormais tous les utilisateurs qui modifieront leur mot de passe. Voulez-vous vraiment continuer ?"
             confirm: "Oui, mettre à jour la politique relative aux mots de passe"
           min_admin_password_length:
-            prompt: "Vous êtes sur le point de modifier votre politique en matière de mots de passe. Cela affectera désormais tous les administrateurs qui modifieront leur mot de passe. Voulez-vous vraiment continuer ?"
             confirm: "Oui, mettre à jour la politique relative aux mots de passe"
           password_unique_charactes:
-            prompt: "Vous êtes sur le point de modifier votre politique en matière de mots de passe. Cela affectera désormais tous les utilisateurs qui modifieront leur mot de passe. Voulez-vous vraiment continuer ?"
             confirm: "Oui, mettre à jour la politique relative aux mots de passe"
           block_common_passwords:
-            prompt: "Vous êtes sur le point de modifier votre politique en matière de mots de passe. Cela affectera désormais tous les utilisateurs qui modifieront leur mot de passe. Voulez-vous vraiment continuer ?"
             confirm: "Oui, mettre à jour la politique relative aux mots de passe"
       badges:
         status: Statut
@@ -7795,6 +7800,9 @@ fr:
         no_user_badges: "%{name} ne s'est vu attribuer aucun badge."
         no_badges: Il n'y a aucun badge à attribuer.
         none_selected: "Sélectionnez un badge pour commencer"
+        sections:
+          query: Requête
+          settings: Paramètres
         usage_heading: Utilisation
         allow_title: Permettre d'utiliser ce badge comme titre sur le profil utilisateur
         multiple_grant: Peut être attribué plusieurs fois

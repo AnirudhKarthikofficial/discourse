@@ -19,7 +19,6 @@ export default class ChannelsListPublic extends Component {
   @service chatTrackingStateManager;
   @service site;
   @service router;
-  @service siteSettings;
 
   get inSidebar() {
     return this.args.inSidebar ?? false;
@@ -34,10 +33,11 @@ export default class ChannelsListPublic extends Component {
   }
 
   get channelList() {
-    if (!this.inSidebar && this.siteSettings.star_chat_channels) {
+    if (this.inSidebar) {
       return this.chatChannelsManager.unstarredPublicMessageChannelsByActivity;
     }
-    return this.chatChannelsManager.publicMessageChannelsByActivity;
+    // In mobile/drawer, show all channels including starred, sorted by activity
+    return this.chatChannelsManager.allPublicChannelsByActivity;
   }
 
   @action
